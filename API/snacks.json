@@ -439,7 +439,14 @@
     {
       "name": "Hunter",
       "email": "hunter@me.com",
-      "id": 2
+      "id": 2,
+      "admin": false
+    },
+    {
+      "name": "Bobby",
+      "email": "bobby@home.com",
+      "admin": false,
+      "id": 3
     }
   ]
 }
