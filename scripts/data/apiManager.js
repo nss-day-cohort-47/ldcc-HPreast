@@ -104,3 +104,20 @@ export const getToppings = (snackId) => {
 		return toppingsFunction(response)
 	})
 }
+
+
+export const loadToppings = () => {
+	return fetch(`${apiURL}/toppings`)
+	.then(response => response.json())
+	.then(parsedResponse => {
+		return parsedResponse;
+	})
+}
+
+export const filteredSnacks = (toppingId) => {
+	return fetch(`${apiURL}/snackToppings?toppingId=${toppingId}&_expand=snack`)
+	.then(response => response.json())
+	.then(parsedResponse => {
+		return parsedResponse;
+	})
+}
