@@ -34,15 +34,27 @@ export const NavBar = () => {
 		</div>
 	</nav>` : ""
 
-	return `
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  		<div class="container-fluid">
-		  <span class="navbar-brand mb-0 h1">LDCC
-		  	<span class="navbar-text">Little Debbie Collector Club</span>
-		  </span>
-		${navItems}
-  		</div>
-	</nav>
-	${addTypeButton}
-	`
+	if(getLoggedInUser().admin === true) {
+		return `
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			  <div class="container-fluid">
+			  <span class="navbar-brand mb-0 h1">LDCC
+				  <span class="navbar-text">Little Debbie Collector Club</span>
+			  </span>
+			${navItems}
+			  </div>
+		</nav>
+		${addTypeButton}
+		`
+	} else {
+		return `
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			  <div class="container-fluid">
+			  <span class="navbar-brand mb-0 h1">LDCC
+				  <span class="navbar-text">Little Debbie Collector Club</span>
+			  </span>
+			${navItems}
+			  </div>
+		</nav>`
+	}
 }
