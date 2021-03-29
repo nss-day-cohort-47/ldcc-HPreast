@@ -7,9 +7,10 @@ import { SnackList } from "./snacks/SnackList.js";
 import { SnackDetails } from "./snacks/SnackDetails.js";
 import { Footer } from "./nav/Footer.js";
 import {
-	logoutUser, setLoggedInUser, loginUser, registerUser, getLoggedInUser,
-	getSnacks, getSingleSnack, getToppings
+	logoutUser, setLoggedInUser, loginUser, registerUser,
+	getSnacks, getSingleSnack, loadToppings, filteredSnacks,
 } from "./data/apiManager.js";
+
 
 
 
@@ -84,6 +85,24 @@ applicationElement.addEventListener("click", event => {
 	}
 })
 
+applicationElement.addEventListener("change", event => {
+	
+	if(event.target.id === "navlist") {
+		console.log("event", event.target.value)
+		let toppingSelection = event.target.value
+		filteredSnacks(toppingSelection)
+		.then(response => {
+			let filteredArray = [];
+			response.forEach(topping => {
+				filteredArray.push(topping.snack)
+			})
+			const listElement = document.querySelector("#mainContent")
+			console.log("filter", filteredArray)
+			listElement.innerHTML = SnackList(filteredArray);
+		})
+	}
+})
+
 const showDetails = (snackObj) => {
 	const listElement = document.querySelector("#mainContent");
 	listElement.innerHTML = SnackDetails(snackObj);
@@ -111,6 +130,8 @@ const showNavBar = () => {
 	applicationElement.innerHTML += NavBar();
 }
 
+
+
 const showSnackList = () => {
 	getSnacks().then(allSnacks => {
 		const listElement = document.querySelector("#mainContent")
@@ -122,13 +143,25 @@ const showFooter = () => {
 	applicationElement.innerHTML += Footer();
 }
 
+const displayToppingList = () => {
+	const toppingElement = document.querySelector(".form-select");
+	loadToppings().then(response => {
+		response.forEach((toppingObj, index) => {
+
+			toppingElement.options[index + 1] = new Option(toppingObj.name, toppingObj.id)
+		})
+	})
+}
+
 const startLDSnacks = () => {
 	applicationElement.innerHTML = "";
 	showNavBar();
 	applicationElement.innerHTML += `<div id="mainContent"></div>`;
 	showSnackList();
 	showFooter();
+	displayToppingList();
 
 }
+
 
 checkForUser();

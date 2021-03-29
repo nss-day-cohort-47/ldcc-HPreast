@@ -16,7 +16,7 @@ export const SnackDetails = (snackObject) => {
 						<div class="col col-details">Season: ${snackObject.season.name}</div>
 					</div>
 					<div class="row row-cols-1">
-						<div class="col col-details">${snackObject.toppingsString}</div>
+						<div class="col col-details">Toppings: ${snackObject.toppingsString}</div>
 					</div>
 				</div>
 			  	
