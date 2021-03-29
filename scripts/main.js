@@ -70,10 +70,10 @@ applicationElement.addEventListener("click", event => {
 				console.log("response", response)
 				showDetails(response);
 			})
-		getToppings(snackId)
-		.then(response => {
-			console.log("toppings", response)
-		} )
+		// getToppings(snackId)
+		// .then(response => {
+		// 	console.log("toppings", response)
+		// } )
 	}
 })
 

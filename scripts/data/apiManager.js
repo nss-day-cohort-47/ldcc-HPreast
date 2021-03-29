@@ -70,9 +70,37 @@ export const getSnacks = () => {
 export const getSingleSnack = (snackId) => {
 	return fetch(`${apiURL}/snacks/${snackId}?_expand=type&_expand=shape&_expand=inFlavor&_expand=season`)
 	.then(response => response.json())
+	.then(parsedResponse => {
+		const toppingId = getToppings(parsedResponse.id)
+		.then(toppingsString => {
+			parsedResponse.toppingsString = toppingsString
+			console.log("parsedResponse", parsedResponse)
+			return  parsedResponse
+		})
+		return toppingId
+	})
+	.then(newObject => newObject)
+}
+
+export let allToppings = []
+const toppingsFunction = (array) => {
+  const filterOptions = array
+  console.log("filterOptions",filterOptions)
+  if(filterOptions !== undefined){  
+	for (const oneTopping of filterOptions){
+	allToppings.push(oneTopping.topping.name)
+  }
+  console.log("allToppings", allToppings.toString())
+  return allToppings.toString()
+  }
+
+
 }
 
 export const getToppings = (snackId) => {
-	return fetch(`${apiURL}/snackToppings/?snackId=${snackId}&_expand=topping&_expand=snack`)
+	return fetch(`${apiURL}/snackToppings/?snackId=${snackId}&_expand=topping`)
 	.then(response => response.json())
+	.then(response => {
+		return toppingsFunction(response)
+	})
 }
