@@ -74,6 +74,32 @@ export const registerType = (typeObj) => {
 	})
 }
 
+
+let addedTopping = {};
+
+export const getAddedTopping = () => {
+	return {...addedTopping};
+}
+
+export const setAddedTopping = (ToppingObj) => {
+	addedTopping = ToppingObj;
+}
+
+export const registerTopping = (ToppingObj) => {
+	return fetch(`${apiURL}/Toppings`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(ToppingObj)
+	})
+	.then(response => response.json())
+	.then(parsedTopping => {
+		setAddedTopping(parsedTopping);
+		return getAddedTopping();
+	})
+}
+
 let snackCollection = [];
 
 export const useSnackCollection = () => {

@@ -34,6 +34,15 @@ export const NavBar = () => {
 		</div>
 	</nav>` : ""
 
+	const addToppingsButton = getLoggedInUser().id ? `
+	<nav class="navbar navbar-light"">
+		<div class="container-fluid">
+			<button id="addTopping"class="btn btn-outline-primary" type="button">Add A Topping</button>
+		
+		</div>
+	</nav>` : ""
+
+
 	if(getLoggedInUser().admin === true) {
 		return `
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -45,6 +54,7 @@ export const NavBar = () => {
 			  </div>
 		</nav>
 		${addTypeButton}
+		${addToppingsButton}
 		`
 	} else {
 		return `

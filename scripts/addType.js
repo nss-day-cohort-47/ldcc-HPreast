@@ -1,6 +1,6 @@
 export const addType = () => {
     return `
-    <div class="typeContainer"
+    <div class="container"
         <form class="typeForm">
             <h2>Add New Type</h2>
             <label for="typeName">Type Name: </label>
