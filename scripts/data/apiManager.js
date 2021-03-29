@@ -1,3 +1,5 @@
+import { addType } from "../addType.js";
+
 const apiURL = "http://localhost:8088";
 
 //// user functions
@@ -47,6 +49,30 @@ export const registerUser = (userObj) => {
 
 
 ///// snack functions
+let addedType = {};
+
+export const getAddedType = () => {
+	return {...addedType};
+}
+
+export const setAddedType = (typeObj) => {
+	addedType = typeObj;
+}
+
+export const registerType = (typeObj) => {
+	return fetch(`${apiURL}/types`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(typeObj)
+	})
+	.then(response => response.json())
+	.then(parsedType => {
+		setAddedType(parsedType);
+		return getAddedType();
+	})
+}
 
 let snackCollection = [];
 

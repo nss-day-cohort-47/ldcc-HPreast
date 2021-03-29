@@ -8,8 +8,9 @@ import { SnackDetails } from "./snacks/SnackDetails.js";
 import { Footer } from "./nav/Footer.js";
 import {
 	logoutUser, setLoggedInUser, loginUser, registerUser,
-	getSnacks, getSingleSnack, loadToppings, filteredSnacks,
+	getSnacks, getSingleSnack, loadToppings, filteredSnacks, registerType,
 } from "./data/apiManager.js";
+import { addType } from "./addType.js";
 
 
 
@@ -108,6 +109,30 @@ const showDetails = (snackObj) => {
 	listElement.innerHTML = SnackDetails(snackObj);
 }
 //end snack listeners
+
+//Add type listener
+applicationElement.addEventListener("click", event => {
+	if(event.target.id === "addType") {
+		applicationElement.innerHTML = "";
+		showNavBar();
+		showTypeForm();
+	}
+})
+
+applicationElement.addEventListener("click", event => {
+	if(event.target.id === "typeSubmit") {
+		const typeObj = {
+			name: document.querySelector("#typeName").value
+		}
+		registerType(typeObj)
+		startLDSnacks();
+	}
+	
+})
+
+const showTypeForm = () => {
+	applicationElement.innerHTML += `${addType()}`;
+}
 
 const checkForUser = () => {
 	if (sessionStorage.getItem("user")) {

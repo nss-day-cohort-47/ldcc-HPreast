@@ -397,6 +397,10 @@
     {
       "id": 5,
       "name": "Cordial"
+    },
+    {
+      "name": "Cereal",
+      "id": 6
     }
   ],
   "shapes": [
