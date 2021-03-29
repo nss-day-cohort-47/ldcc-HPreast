@@ -11,6 +11,7 @@ import {
 	getSnacks, getSingleSnack, loadToppings, filteredSnacks, registerType,
 } from "./data/apiManager.js";
 import { addType } from "./addType.js";
+import { addTopping } from "./addTopping.js";
 
 
 
@@ -137,13 +138,37 @@ applicationElement.addEventListener("click", event => {
 })
 
 const cancelType = () => {
-	const cancelElement = document.querySelector(".typeContainer");
+	const cancelElement = document.querySelector(".container");
 	cancelElement.innerHTML = startLDSnacks();
 }
 
 const showTypeForm = () => {
 	applicationElement.innerHTML += `${addType()}`;
 }
+
+const showToppingForm = () => {
+	applicationElement.innerHTML += `${addTopping()}`;
+}
+
+applicationElement.addEventListener("click", event => {
+	if(event.target.id === "addTopping") {
+		applicationElement.innerHTML = "";
+		showNavBar();
+		showToppingForm();
+	}
+})
+
+applicationElement.addEventListener("click", event => {
+	if(event.target.id === "toppingSubmit") {
+		const toppingObj = {
+			name: document.querySelector("#toppingName").value
+		}
+		registerTopping(toppingObj)
+		startLDSnacks();
+	}
+	
+})
+
 
 const checkForUser = () => {
 	if (sessionStorage.getItem("user")) {
