@@ -130,6 +130,17 @@ applicationElement.addEventListener("click", event => {
 	
 })
 
+applicationElement.addEventListener("click", event => {
+	if(event.target.id === "formCancel") {
+		cancelType();
+	}
+})
+
+const cancelType = () => {
+	const cancelElement = document.querySelector(".typeContainer");
+	cancelElement.innerHTML = startLDSnacks();
+}
+
 const showTypeForm = () => {
 	applicationElement.innerHTML += `${addType()}`;
 }
